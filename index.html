@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <table>
+    <form name="myform" action="" method="post" onsubmit="return validate()">
+            <tr>
+                <th>First Name :</th>
+                <td><input type="text" name="fn" id="fn"></td>
+            </tr>
+    
+            <tr>
+                <th>Last Name :</th>
+                <td><input type="text" name="ln" id="ln"></td>
+            </tr>
+
+            <tr>
+                <th>Email :</th>
+                <td><input type="text" name="email" id="email"></td>
+            </tr>
+
+            <tr>
+                <th>Mobile :</th>
+                <td><input type="text" name="mobile" id="mobile"></td>
+            </tr>
+
+            <tr>
+                <th>Gender :</th>
+                <td><input type="radio" name="gender" id="male" value="m">Male
+                <input type="radio" name="gender" id="female" value="f">Female</td>
+            </tr>
+
+            <tr>
+                <th>Date Of Birth :</th>
+                <td><input type="date" id="dof" name="dof"></td>
+            </tr>
+
+            <tr>
+                <th>Address :</th>
+                <td><textarea  cols="0" rows="6" id="one" name="addr"></textarea></td>
+            </tr>
+
+            <tr>
+                <th>City :</th>
+                <td><input type="text" name="city" id="city"></td>
+            </tr>
+
+            <tr>
+                <th>Area PIN :</th>
+                <td><input type="text" name="pin" id="pin"></td>
+            </tr>
+
+            <tr>
+                <th>State :</th>
+                <td><input type="text" name="state" id="state"></td>
+            </tr>
+
+            <tr>
+               <th> <label for ="cars">Qualification:</label></th>
+
+               <td><select id="cars" Name="cars">
+                <option value="B.tech">Select qualification</option>
+                <option>BE</option>
+                <option value="b.com">B.com</option>
+                <option value="M.tech">M.tech</option>
+                <option value="B.tech">B.tech</option>
+               </select>
+            </td>
+            </tr>
+
+            <tr>
+                <th>Specialization :</th>
+                <td>
+                    <input type="checkbox" id="cs">Computer Science <br>
+                    <input type="checkbox" id="it">Information Technology <br>
+                    <input type="checkbox" id="ca">Computer Architecture <br>
+                    <input type="checkbox" id="tc">Tele Communication
+                </td>
+            </tr><br><br>
+
+            <tr>
+                <th>Password :</th>
+                <td><input type="password" name="pass" id="pass"></td>
+            </tr><br><br>
+
+            <tr>
+                <td><button id="submit" type="submit">Registered</button></td>
+                
+            </tr>
+
+        </table>
+    </form>
+
+    <script>
+        function validate() {
+            var firstName = document.getElementById('fn').value.trim();
+            var lastName = document.getElementById('ln').value.trim();
+            var email = document.getElementById('email').value.trim();
+            var mobile = document.getElementById('mobile').value.trim();
+            var gender = document.querySelector('input[name="gender"]:checked');
+            var dob = document.getElementById('dof').value.trim();
+            var address = document.getElementById('one').value.trim();
+            var city = document.getElementById('city').value.trim();
+            var pin = document.getElementById('pin').value.trim();
+            var state = document.getElementById('state').value.trim();
+            var qualification = document.getElementById('cars').value;
+            var specialization = document.querySelectorAll('input[type="checkbox"]:checked');
+            var password = document.getElementById('pass').value.trim();
+
+            // Regular expression patterns
+            var namePattern = /^[a-zA-Z]+$/;
+            
+            var fn=document.forms["myform"]["fn"].value;
+            var emailPattern = /^[a-zA-Z0-9_]+@[a-zA-Z]+\.[a-zA-Z]{2,4}$/;
+            var mobilePattern = /^[0-9]{10,11}$/;
+            var pinPattern = /^\d{6}$/;
+            var passwordPattern = /^(?=.\d)(?=.[0-9])(?=.*[a-zA-Z]).{8,}$/;
+
+        if (fn=="" || fn=="Alpha") {
+            alert('please fill out the User First Name');
+            return false;
+        }
+    
+        var alpha=/^[A-Za-z]+$/;
+        if (!alpha.test(fn)) {
+            alert('Please fill only alpha User First Name');
+            return false;
+        }
+
+        var ln=document.forms["myform"]["ln"].value;
+        if (ln=="" || ln==null) {
+            // document.getElementById('ln').innerHTML="Please fill out the User Name";
+            alert('Please fill only alpha User Last Name')
+            return false;
+        }
+
+            if (!email.match(emailPattern)) {
+                alert('Please enter a valid email address.');
+                return false;
+            }
+
+            if (!mobile.match(mobilePattern)) {
+                alert('Please enter a valid 10 digit mobile number.');
+                return false;
+            }
+
+            if (!gender) {
+                alert('Please select a gender.');
+                return false;
+            }
+
+            if (!dob) {
+                alert('Please select a date of birth.');
+                return false;
+            }
+
+            if (!address) {
+                alert('Please enter your address.');
+                return false;
+            }
+
+            if (!city.match(namePattern)) {
+                alert('Please enter a valid city name.');
+                return false;
+            }
+
+            if (!pin.match(pinPattern)) {
+                alert('Please enter a valid 6 digit PIN code.');
+                return false;
+            }
+
+            if (!state.match(namePattern)) {
+                alert('Please enter a valid state name.');
+                return false;
+            }
+
+            if (qualification === 'Select qualification') {
+                alert('Please select your qualification.');
+                return false;
+            }
+
+            if (specialization.length === 0) {
+                alert('Please select at least one specialization.');
+                return false;
+            }
+
+            if (!password.match(passwordPattern)) {
+                alert('Password must be at least 8 characters long and contain at least one digit, one lowercase and one uppercase letter.');
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>
